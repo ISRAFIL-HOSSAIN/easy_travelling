@@ -19,8 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 248, 250),
       appBar: AppBar(
-          title: Text('Easy Traveling'),
-          backgroundColor: Color.fromARGB(230, 251, 190, 23),
+          title: const Text('Easy Traveling'),
+          backgroundColor: const Color.fromARGB(230, 251, 190, 23),
           actions: [
             TextButton(
                 onPressed: () async {
@@ -33,100 +33,131 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(color: Color.fromARGB(255, 33, 33, 33)),
                 ))
           ]),
-      body: Column(children: [
-        Container(
-          color: Colors.white,
-          child: Center(
-            child: Column(children: [
-              const SizedBox(height: 30),
-              const Text(
-                "Easy Travelling",
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    fontStyle: FontStyle.italic),
-              ),
-              const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.center,
-                child: Row(children: [
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  Container(
-                    child: Image.asset(
-                      "assets/images/logo.png",
-                      height: 40,
-                      width: 260,
-                    ),
-                  ),
-                  Container(
-                    child: Image.asset(
-                      "assets/images/accountlogo.png",
-                      height: 40,
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            child: Center(
+              child: Column(children: [
+                const SizedBox(height: 15),
+                const Text(
+                  "Easy Travelling",
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.italic),
+                ),
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.center,
+                  child: Row(children: [
+                    const SizedBox(
                       width: 40,
                     ),
-                  ),
-                ]),
-              ),
-              const SizedBox(height: 20),
-            ]),
-          ),
-        ),
-        Container(
-          color: const Color.fromARGB(255, 241, 248, 250),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 15,
-              ),
-              const Text(
-                "Routes",
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+                    Container(
+                      child: Image.asset(
+                        "assets/images/logo.png",
+                        height: 40,
+                        width: 260,
+                      ),
+                    ),
+                    Container(
+                      child: Image.asset(
+                        "assets/images/accountlogo.png",
+                        height: 40,
+                        width: 40,
+                      ),
+                    ),
+                  ]),
                 ),
+                const SizedBox(height: 20),
+              ]),
+            ),
+          ),
+          Container(
+            color: const Color.fromARGB(255, 241, 248, 250),
+            child: const Text(
+              "Routes",
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: SingleChildScrollView(
-                  child: Center(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Card(
-                            elevation: 4.0,
-                            child: Column(children: [
-                              Container(
-                                height: 200.0,
-                                width: MediaQuery.of(context).size.width,
-                                child: Image.asset(
-                                  "assets/images/sign_back.png",
-                                  fit: BoxFit.cover,
-                                ),
+            ),
+          ),
+
+          // List of Map routes
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+               
+                child: ListView.builder(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Container(
+                          margin: const EdgeInsets.only(left: 10, right: 10),
+                          child: Column(
+                            children: [
+                              Card(
+                                elevation: 4.0,
+                                child: Column(children: [
+                                  Container(
+                                    height: 200.0,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Image.asset(
+                                      "assets/images/sign_back.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(16.0),
+                                    alignment: Alignment.centerLeft,
+                                    child: Text("Hello"),
+                                  )
+                                ]),
                               ),
-                              Container(
-                                padding: EdgeInsets.all(16.0),
-                                alignment: Alignment.centerLeft,
-                                child: Text("Hello"),
-                              )
-                            ]),
-                          ),
-                        ]),
-                  ),
-                ),
-              )
-            ],
+                            ],
+                          ));
+                    }),
+              ),
+            ),
           ),
-        )
-      ]),
+          //   Padding(
+          //     padding: EdgeInsets.all(20),
+          //     child: ListView(children: [
+          //       Center(
+          //         child: Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               Card(
+          //                 elevation: 4.0,
+          //                 child: Column(children: [
+          //                   Container(
+          //                     height: 200.0,
+          //                     width: MediaQuery.of(context).size.width,
+          //                     child: Image.asset(
+          //                       "assets/images/sign_back.png",
+          //                       fit: BoxFit.cover,
+          //                     ),
+          //                   ),
+          //                   Container(
+          //                     padding: EdgeInsets.all(16.0),
+          //                     alignment: Alignment.centerLeft,
+          //                     child: Text("Hello"),
+          //                   )
+          //                 ]),
+          //               ),
+          //             ]),
+          //       ),
+          //     ]),
+          //   ),
+        ],
+      ),
     );
   }
 }

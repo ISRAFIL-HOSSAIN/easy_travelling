@@ -1,4 +1,5 @@
 import 'package:easy_travel/views/screens/login.dart';
+import 'package:easy_travel/views/screens/routes_single.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -75,11 +76,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ]),
             ),
           ),
+          const SizedBox(
+            height: 15,
+          ),
           Container(
             color: const Color.fromARGB(255, 241, 248, 250),
+            padding: EdgeInsets.only(right: 250),
             child: const Text(
               "Routes",
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.left,
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 fontSize: 18,
@@ -87,23 +92,27 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          const SizedBox(
+            height: 15,
+          ),
 
           // List of Map routes
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-               
+                height: MediaQuery.of(context).size.height * 1,
                 child: ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
+                    physics: const AlwaysScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 10,
+                    itemCount: 20,
                     itemBuilder: (context, index) {
                       return Container(
                           margin: const EdgeInsets.only(left: 10, right: 10),
                           child: Column(
                             children: [
                               Card(
-                                elevation: 4.0,
+                                elevation: 10.0,
+                                margin: EdgeInsets.only(bottom: 15),
                                 child: Column(children: [
                                   Container(
                                     height: 200.0,
@@ -113,11 +122,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.all(16.0),
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("Hello"),
-                                  )
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SingleScreen(),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(16.0),
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text("Hello"),
+                                    ),
+                                  ),
                                 ]),
                               ),
                             ],
@@ -126,36 +145,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          //   Padding(
-          //     padding: EdgeInsets.all(20),
-          //     child: ListView(children: [
-          //       Center(
-          //         child: Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               Card(
-          //                 elevation: 4.0,
-          //                 child: Column(children: [
-          //                   Container(
-          //                     height: 200.0,
-          //                     width: MediaQuery.of(context).size.width,
-          //                     child: Image.asset(
-          //                       "assets/images/sign_back.png",
-          //                       fit: BoxFit.cover,
-          //                     ),
-          //                   ),
-          //                   Container(
-          //                     padding: EdgeInsets.all(16.0),
-          //                     alignment: Alignment.centerLeft,
-          //                     child: Text("Hello"),
-          //                   )
-          //                 ]),
-          //               ),
-          //             ]),
-          //       ),
-          //     ]),
-          //   ),
+          const SizedBox(
+            height: 20,
+          )
         ],
       ),
     );

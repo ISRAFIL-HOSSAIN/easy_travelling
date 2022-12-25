@@ -1,4 +1,5 @@
 import 'package:easy_travel/views/screens/Home.dart';
+import 'package:easy_travel/views/screens/routes_single.dart';
 import 'package:easy_travel/views/screens/signup.dart';
 import 'package:easy_travel/views/screens/splashScreen.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ void main() {
       'SplashScreen': (context) => const SplashScreen(),
       'register': (context) => const SignupScreen(),
       'home' : (context)=>const HomeScreen(),
+      'singlepage' : (context)=>const SingleScreen(),
     },
   ));
 }

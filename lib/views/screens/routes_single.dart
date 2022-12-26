@@ -1,8 +1,6 @@
 import 'package:easy_travel/views/screens/details_page.dart';
-import 'package:easy_travel/views/screens/login.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,9 +47,9 @@ class _SingleScreenState extends State<SingleScreen> {
                           const Text(
                             "Easy Travelling",
                             style: TextStyle(
+                                fontFamily: "Poppins",
                                 fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.italic),
+                                fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(height: 5),
                           const SizedBox(
@@ -78,12 +76,10 @@ class _SingleScreenState extends State<SingleScreen> {
             color: const Color.fromARGB(255, 241, 248, 250),
             child: const Text(
               "Andalusie in 7 dagen, 500 km",
-              textAlign: TextAlign.start,
               style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+                  fontFamily: "Poppins",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500),
             ),
           ),
           Container(
@@ -126,12 +122,10 @@ class _SingleScreenState extends State<SingleScreen> {
             padding: const EdgeInsets.all(10),
             child: const Text(
               "Steden",
-              textAlign: TextAlign.left,
               style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+                  fontFamily: "Poppins",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500),
             ),
           ),
           // List of Map routes

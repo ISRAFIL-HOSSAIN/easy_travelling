@@ -20,7 +20,7 @@ class LoginController extends GetxController {
       Map body = {
         'email': emailController.text.trim(),
         'password': passwordController.text
-      };
+      }; 
       http.Response response =
           await http.post(url, body: jsonEncode(body), headers: headers);
 

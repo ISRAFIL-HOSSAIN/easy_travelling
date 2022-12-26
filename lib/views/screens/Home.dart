@@ -17,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   @override
   Widget build(BuildContext context) {
+    var img = "assets/images/sign_back.png";
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 248, 250),
       appBar: AppBar(
@@ -43,11 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 15),
                 const Text(
                   "Easy Travelling",
-                  textAlign: TextAlign.justify,
                   style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.italic),
+                      fontFamily: "Poppins",
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 20),
                 Align(
@@ -84,12 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(right: 250),
             child: const Text(
               "Routes",
-              textAlign: TextAlign.left,
               style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
+                  fontFamily: "Poppins",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500),
             ),
           ),
           const SizedBox(
@@ -114,12 +112,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 elevation: 10.0,
                                 margin: EdgeInsets.only(bottom: 15),
                                 child: Column(children: [
-                                  Container(
-                                    height: 200.0,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Image.asset(
-                                      "assets/images/sign_back.png",
-                                      fit: BoxFit.cover,
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDialogFunc(context, img[index]);
+                                    },
+                                    child: Container(
+                                      height: 200.0,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Image.asset(
+                                        img,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                   InkWell(
@@ -152,4 +155,48 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+showDialogFunc(BuildContext context, String img) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+            child: Material(
+                type: MaterialType.transparency,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(0),
+                      color: Color.fromARGB(255, 80, 80, 80)),
+                  padding: EdgeInsets.all(15),
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap: () => Get.back(),
+                            child: Container(
+                              height: 20,
+                              width: 20,
+                              child: Image.asset("assets/images/cancel.png"),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(0),
+                        child: Image.asset(img),
+                      )
+                    ],
+                  ),
+                )));
+      });
 }

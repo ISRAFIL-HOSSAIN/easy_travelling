@@ -40,6 +40,7 @@ dependencies:
   google_fonts: ^3.0.1
   shared_preferences: ^2.0.15
   http: ^0.13.5
+  url_launcher: ^6.1.7
 
 dev_dependencies:
   flutter_test:
@@ -87,7 +88,15 @@ flutter:
         - asset: assets/fonts/segoeprintfont.ttf
         - asset: assets/fonts/poppinssemiboldtalic.ttf
         - asset: assets/fonts/poppinsextrabolitalic.ttf
+        - asset: assets/fonts/poppinsregular.ttf
+        
   #         style: italic
+    - family: Poppins_normal 
+      fonts:
+        - asset: assets/fonts/poppinsregular.ttf
+    - family: Poppins_semi
+      fonts:
+        - asset: assets/fonts/poppinsbold.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

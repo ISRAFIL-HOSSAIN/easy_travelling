@@ -6,4 +6,5 @@ class ApiEndPoints {
 class _AuthEndPoints{
   final String register = 'registration'; 
   final String login = 'login'; 
+  final String route = 'getRouteList'; 
 }

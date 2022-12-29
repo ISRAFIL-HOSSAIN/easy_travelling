@@ -1,10 +1,13 @@
+
+import 'package:easy_travel/model/Route_model.dart';
 import 'package:easy_travel/views/screens/login.dart';
 import 'package:easy_travel/views/screens/routes_single.dart';
+import 'package:easy_travel/widget/AppColors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../service/api_service.dart';
+import '../../widget/showPopup.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,26 +17,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<RouteModel> fetchdata;
+  // final RouteMapController routecontroller = Get.put(RouteMapController());
+
+  @override
+  void initState() {
+    super.initState();
+    fetchdata = ApiService.fetchRouteData();
+    print("Fetch Data is : ");
+    print(fetchdata);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 248, 250),
       appBar: AppBar(
-          title: const Text('Easy Traveling'),
-          backgroundColor: const Color.fromARGB(230, 251, 190, 23),
-          actions: [
-            TextButton(
-                onPressed: () async {
-                  final SharedPreferences? prefs = await _prefs;
-                  prefs?.clear();
-                  Get.offAll(const LoginScreen());
-                },
-                child: const Text(
-                  'logout',
-                  style: TextStyle(color: Color.fromARGB(255, 33, 33, 33)),
-                ))
-          ]),
+        title: const Text('Easy Traveling'),
+        backgroundColor: const Color.fromARGB(230, 251, 190, 23),
+        automaticallyImplyLeading: false,
+      ),
       body: Column(
         children: [
           Container(
@@ -43,11 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 15),
                 const Text(
                   "Easy Travelling",
-                  textAlign: TextAlign.justify,
                   style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.italic),
+                      fontFamily: "Poppins",
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 20),
                 Align(
@@ -63,11 +65,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: 260,
                       ),
                     ),
-                    Container(
-                      child: Image.asset(
-                        "assets/images/accountlogo.png",
-                        height: 40,
-                        width: 40,
+                    InkWell(
+                      onTap: () {
+                        Get.to(const LoginScreen());
+                      },
+                      child: Container(
+                        child: Image.asset(
+                          "assets/images/accountlogo.png",
+                          height: 40,
+                          width: 40,
+                        ),
                       ),
                     ),
                   ]),
@@ -81,70 +88,124 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Container(
             color: const Color.fromARGB(255, 241, 248, 250),
-            padding: EdgeInsets.only(right: 250),
+            padding: const EdgeInsets.only(right: 250),
             child: const Text(
               "Routes",
-              textAlign: TextAlign.left,
               style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
+                  fontFamily: "Poppins",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500),
             ),
           ),
           const SizedBox(
             height: 15,
           ),
 
-          // List of Map routes
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 1,
-                child: ListView.builder(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 20,
-                    itemBuilder: (context, index) {
-                      return Container(
-                          margin: const EdgeInsets.only(left: 10, right: 10),
-                          child: Column(
-                            children: [
-                              Card(
-                                elevation: 10.0,
-                                margin: EdgeInsets.only(bottom: 15),
-                                child: Column(children: [
-                                  Container(
-                                    height: 200.0,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Image.asset(
-                                      "assets/images/sign_back.png",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => SingleScreen(),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.all(16.0),
-                                      alignment: Alignment.centerLeft,
-                                      child: const Text("Hello"),
-                                    ),
-                                  ),
-                                ]),
-                              ),
-                            ],
-                          ));
-                    }),
-              ),
-            ),
-          ),
+          FutureBuilder<RouteModel>(
+              future: fetchdata,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Expanded(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 1,
+                        child: ListView.builder(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data?.data!.length,
+                            itemBuilder: (_, index) {
+                              return Container(
+                                  margin: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Column(
+                                    children: [
+                                      Card(
+                                        elevation: 10.0,
+                                        margin: EdgeInsets.only(bottom: 15),
+                                        child: Column(children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              showDialogFunc(context,
+                                                  "${snapshot.data?.data![index].image}");
+                                            },
+                                            child: Container(
+                                              height: 200.0,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              child: (snapshot
+                                                          .data
+                                                          ?.data![index]
+                                                          .image) !=
+                                                      null
+                                                  ? Image.network(
+                                                      // routecontroller.routeList,
+                                                      "${snapshot.data?.data![index].image}",
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : Image.asset(
+                                                      "assets/images/image.png",
+                                                      fit: BoxFit.cover),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SingleScreen(
+                                                          routemodel: snapshot
+                                                              .data
+                                                              ?.data![index]),
+                                                ),
+                                              );
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(16.0),
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                "${snapshot.data?.data![index].name}",
+                                                style: const TextStyle(
+                                                    fontFamily: "Poppins",
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
+                                      ),
+                                    ],
+                                  ));
+                            }),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Column(
+                    children: const [
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Center(
+                          child: CircularProgressIndicator(
+                        color: AppColors.mcolor,
+                      )),
+                      Text(
+                        "No Data Found !",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  );
+                }
+              }),
+
+          // }
+          // }),
           const SizedBox(
             height: 20,
           )
@@ -153,3 +214,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+

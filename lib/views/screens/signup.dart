@@ -15,8 +15,22 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  RegisterationController registerationController =
-      Get.put(RegisterationController());
+  SignupController signupController = Get.put(SignupController());
+  final _globalKey = GlobalKey<FormState>();
+
+  String firstnameError = "FirstName Can not be empty ";
+  String lastnameError = "LastName Can not be empty ";
+  String emailError = "Email Can not be empty ";
+  String addressError = "Address Can not be empty ";
+  String passwordError = "Password Can not be empty ";
+  String phoneError = "Phone Can not be empty ";
+
+  TextEditingController firstnameController = TextEditingController();
+  TextEditingController lastnameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -121,33 +135,96 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Widget registerWidget() {
-    return Column(
-      children: [
-        InputTextFieldWidget(
-            registerationController.nameController, 'voornaam'),
-        const SizedBox(
-          height: 20,
-        ),
-        InputTextFieldWidget(
-            registerationController.nameController, 'Achternaam'),
-        const SizedBox(
-          height: 20,
-        ),
-        InputTextFieldWidget(
-            registerationController.emailController, 'E-mail adres'),
-        const SizedBox(
-          height: 20,
-        ),
-        InputTextFieldWidget(
-            registerationController.passwordController, 'Wachtwoord'),
-        const SizedBox(
-          height: 30,
-        ),
-        SubmitButton(
-          onPressed: () => registerationController.registerWithEmail(),
-          title: 'Aanmaken',
-        )
-      ],
+    return Form(
+      key: _globalKey,
+      child: Column(
+        children: [
+          CustomTextField(
+              controller: firstnameController,
+              hintText: 'voornaam',
+              error: firstnameError,
+              onUseridValueChange: (value) {
+                print(value);
+              }),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(
+              controller: lastnameController,
+              hintText: 'achternaam',
+              error: lastnameError,
+              onUseridValueChange: (value) {
+                print(value);
+              }),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(
+              controller: emailController,
+              hintText: 'E-mail adres',
+              error: emailError,
+              onUseridValueChange: (value) {
+                print(value);
+              }),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(
+              controller: addressController,
+              hintText: 'adres',
+              error: addressError,
+              onUseridValueChange: (value) {
+                print(value);
+              }),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(
+              controller: mobileController,
+              hintText: 'telefoon',
+              error: phoneError,
+              onUseridValueChange: (value) {
+                print(value);
+              }),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(
+              controller: passwordController,
+              hintText: 'Wachtwoord',
+              error: passwordError,
+              onUseridValueChange: (value) {
+                print(value);
+              }),
+          const SizedBox(
+            height: 20,
+          ),
+          SubmitButton(
+            handleButtonClick: () {
+              signup();
+            },
+            title: 'Aanmaken',
+          ),
+        ],
+      ),
     );
+    
   }
+  void signup() {
+    final isValid = _globalKey.currentState!.validate();
+    if (isValid) {
+      signupController.register(
+        firstnameController.text,
+        lastnameController.text,
+        emailController.text,
+        passwordController.text,
+        addressController.text,
+        mobileController.text,
+      );
+    } else {
+      return;
+    }
+  }
+
+  
 }

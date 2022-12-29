@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../controller/login_controller.dart';
 import '../../widget/input_fields.dart';
 import '../../widget/submit_button.dart';
 
@@ -15,8 +16,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  RegisterationController registerationController =
-      Get.put(RegisterationController());
+  LoginController loginController = Get.put(LoginController());
+
+  final _globalKey = GlobalKey<FormState>();
+  String emailError = "Email Can not be empty ";
+  String passwordError = "Password Can not be empty ";
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,131 +67,147 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(25),
+                  padding: const EdgeInsets.all(25),
                   child: Center(
-                      child: Column(
-                    children: [
-                      InputTextFieldWidget(
-                          registerationController.nameController, 'voornaam'),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      InputTextFieldWidget(
-                          registerationController.nameController, 'voornaam'),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      SubmitButton(
-                        onPressed: () =>
-                            registerationController.registerWithEmail(),
-                        title: 'Login',
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Container(
+                      child: Form(
+                    key: _globalKey,
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                            controller: emailController,
+                            hintText: "E-mail adres",
+                            error: emailError,
+                            onUseridValueChange: (value) {
+                              print(value);
+                            }),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CustomTextField(
+                            controller: passwordController,
+                            hintText: "Wachtwoord",
+                            error: passwordError,
+                            onUseridValueChange: (value) {
+                              print(value);
+                            }),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        SubmitButton(
+                          handleButtonClick: () {
+                            signin();
+                          },
+                          title: 'Login',
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Container(
+                                width: 90,
+                                height: 3,
+                                color:
+                                    const Color.fromARGB(255, 215, 215, 215)),
+                            const SizedBox(width: 5),
+                            const Text(
+                              "Inloggen met ",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 226, 226, 226),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            Container(
                               width: 90,
                               height: 3,
-                              color: Color.fromARGB(255, 215, 215, 215)),
-                          const SizedBox(width: 5),
-                          const Text(
-                            "Inloggen met ",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 226, 226, 226),
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
+                              color: const Color.fromARGB(255, 215, 215, 215),
                             ),
-                          ),
-                          const SizedBox(width: 5),
-                          Container(
-                            width: 90,
-                            height: 3,
-                            color: Color.fromARGB(255, 215, 215, 215),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 40,
-                          ),
-                          Container(
-                            height: 75,
-                            width: 75,
-                            padding: EdgeInsets.all(15),
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50))),
-                            child: Image.asset(
-                              "assets/images/googlelogo.png",
-                              fit: BoxFit.cover,
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 60,
                             ),
-                          ),
-                          const SizedBox(
-                            width: 60,
-                          ),
-                          Container(
-                            height: 75,
-                            width: 75,
-                            padding: EdgeInsets.all(15),
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50))),
-                            child: Image.asset(
-                              "assets/images/fb.png",
+                            Container(
+                              height: 60,
+                              width: 60,
+                              padding: const EdgeInsets.all(15),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50))),
+                              child: Image.asset(
+                                "assets/images/googlelogo.png",
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            width: 30,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            child: DefaultTextStyle(
-                              style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                fontSize: 16,
-                                color: Color.fromARGB(223, 212, 233, 255),
-                                fontWeight: FontWeight.w500,
-                              )),
+                            const SizedBox(
+                              width: 60,
+                            ),
+                            Container(
+                              height: 60,
+                              width: 60,
+                              padding: const EdgeInsets.all(15),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50))),
+                              child: Image.asset(
+                                "assets/images/fb.png",
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              child: DefaultTextStyle(
+                                style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromARGB(223, 212, 233, 255),
+                                  fontWeight: FontWeight.w500,
+                                )),
+                                child: const Text(
+                                  "Geen account?",
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            OutlinedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SignupScreen()));
+                              },
+                              style: OutlinedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
                               child: const Text(
-                                "Geen account?",
-                                textAlign: TextAlign.center,
+                                'Aanmaken',
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            width: 40,
-                          ),
-                          OutlinedButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => SignupScreen()));
-                            },
-                            style: OutlinedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            child: const Text(
-                              'Aanmaken',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   )),
                 )
               ],
@@ -194,5 +216,17 @@ class _LoginScreenState extends State<LoginScreen> {
         ))
       ],
     );
+  }
+
+  void signin() {
+    final isValid = _globalKey.currentState!.validate();
+    if (isValid) {
+      LoginController.login(
+        emailController.text,
+        passwordController.text,
+      );
+    } else {
+      return;
+    }
   }
 }

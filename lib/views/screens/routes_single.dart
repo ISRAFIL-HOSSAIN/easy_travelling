@@ -1,18 +1,17 @@
+import 'package:easy_travel/views/screens/Home.dart';
 import 'package:easy_travel/views/screens/details_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class SingleScreen extends StatefulWidget {
-  const SingleScreen({super.key});
+import '../../model/Route_model.dart';
+import '../../widget/showPopup.dart';
 
-  @override
-  State<SingleScreen> createState() => _SingleScreenState();
-}
+class SingleScreen extends StatelessWidget {
+  final RouteAllData? routemodel;
 
-class _SingleScreenState extends State<SingleScreen> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  const SingleScreen({Key? key, required this.routemodel}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +19,7 @@ class _SingleScreenState extends State<SingleScreen> {
       appBar: AppBar(
         title: const Text('Easy Traveling'),
         backgroundColor: const Color.fromARGB(230, 251, 190, 23),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [
@@ -28,17 +28,22 @@ class _SingleScreenState extends State<SingleScreen> {
             child: Center(
               child: Row(
                 children: [
-                  Container(
-                    padding: EdgeInsets.only(left: 15, bottom: 21),
-                    height: 40,
-                    width: 28,
-                    child: Image.asset(
-                      "assets/images/backarrow.png",
-                      fit: BoxFit.fill,
+                  InkWell(
+                    onTap: () {
+                      Get.to(const HomeScreen());
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 15, bottom: 21),
+                      height: 40,
+                      width: 28,
+                      child: Image.asset(
+                        "assets/images/backarrow.png",
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 30, right: 30),
+                    margin: const EdgeInsets.only(left: 30, right: 30),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -72,51 +77,59 @@ class _SingleScreenState extends State<SingleScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             color: const Color.fromARGB(255, 241, 248, 250),
-            child: const Text(
-              "Andalusie in 7 dagen, 500 km",
-              style: TextStyle(
+            child: Text(
+              "${routemodel?.name}",
+              style: const TextStyle(
                   fontFamily: "Poppins",
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
             ),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 150,
-            margin: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: AssetImage("assets/images/sign_back.png"),
-                fit: BoxFit.cover,
-                //   image: NetworkImage(
-                //       'https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png'),
-                //   fit: BoxFit.cover,
+          InkWell(
+            onTap: () {
+              showDialogFunc(context, "${routemodel?.image}");
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: 150,
+              margin: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  // image: AssetImage("assets/images/sign_back.png"),
+                  // fit: BoxFit.cover,
+                  
+                  image: 
+                  NetworkImage(
+                    "${routemodel?.image}",
+                  ),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 95, 95, 95),
+                    offset: Offset(
+                      1.0,
+                      1.0,
+                    ), //Offset
+                    blurRadius: 10.0,
+                    spreadRadius: 2.0,
+                  ), //BoxShadow
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(0.0, 0.0),
+                    blurRadius: 0.0,
+                    spreadRadius: 0.0,
+                  ), //BoxShadow
+                ],
               ),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black,
-                  offset: Offset(
-                    5.0,
-                    5.0,
-                  ), //Offset
-                  blurRadius: 10.0,
-                  spreadRadius: 2.0,
-                ), //BoxShadow
-                BoxShadow(
-                  color: Colors.white,
-                  offset: Offset(0.0, 0.0),
-                  blurRadius: 0.0,
-                  spreadRadius: 0.0,
-                ), //BoxShadow
-              ],
+              // child: Image.asset(
+              //   "assets/images/sign_back.png",
+              //   fit: BoxFit.cover,
+              // ),
             ),
-            // child: Image.asset(
-            //   "assets/images/sign_back.png",
-            //   fit: BoxFit.cover,
-            // ),
           ),
           Container(
             padding: const EdgeInsets.all(10),
@@ -128,15 +141,14 @@ class _SingleScreenState extends State<SingleScreen> {
                   fontWeight: FontWeight.w500),
             ),
           ),
-          // List of Map routes
           Expanded(
             child: SingleChildScrollView(
               child: Container(
                 height: 350,
                 child: ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
+                    physics: const AlwaysScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 16,
+                    itemCount: routemodel!.city!.length,
                     itemBuilder: (context, index) {
                       return Container(
                           margin: const EdgeInsets.only(
@@ -151,7 +163,9 @@ class _SingleScreenState extends State<SingleScreen> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => DetailScreen(),
+                                          builder: (context) => DetailScreen(
+                                              citydata:
+                                                  routemodel?.city![index]),
                                         ),
                                       );
                                     },
@@ -169,8 +183,10 @@ class _SingleScreenState extends State<SingleScreen> {
                                               CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
-                                          children: const [
-                                            Text("Hello"),
+                                          children: [
+                                            Text(
+                                              "${routemodel?.city![index].name}",
+                                            ),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
                                         )),

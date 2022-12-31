@@ -17,8 +17,8 @@ class SingleScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 248, 250),
       appBar: AppBar(
-        title: const Text('Easy Traveling'),
-        backgroundColor: const Color.fromARGB(230, 251, 190, 23),
+        backgroundColor: Colors.transparent,
+        toolbarHeight: 0,
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -99,9 +99,8 @@ class SingleScreen extends StatelessWidget {
                 image: DecorationImage(
                   // image: AssetImage("assets/images/sign_back.png"),
                   // fit: BoxFit.cover,
-                  
-                  image: 
-                  NetworkImage(
+
+                  image: NetworkImage(
                     "${routemodel?.image}",
                   ),
                   fit: BoxFit.cover,

@@ -1,4 +1,3 @@
-
 import 'package:easy_travel/model/Route_model.dart';
 import 'package:easy_travel/views/screens/login.dart';
 import 'package:easy_travel/views/screens/routes_single.dart';
@@ -33,8 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 248, 250),
       appBar: AppBar(
-        title: const Text('Easy Traveling'),
-        backgroundColor: const Color.fromARGB(230, 251, 190, 23),
+        // title: const Text('Easy Traveling'),
+        backgroundColor: Colors.transparent,
+        toolbarHeight: 0,
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Expanded(
                     child: SingleChildScrollView(
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 1,
+                        height: MediaQuery.of(context).size.height * 0.7,
                         child: ListView.builder(
                             physics: const AlwaysScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -214,4 +214,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

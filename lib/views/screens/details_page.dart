@@ -31,8 +31,8 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Easy Traveling'),
-        backgroundColor: const Color.fromARGB(230, 251, 190, 23),
+        backgroundColor: Colors.transparent,
+        toolbarHeight: 0,
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -110,8 +110,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                if (step == 0) Parkeren(),
-                if (step == 1) Overnachten(),
+                if (step == 0) parkeren(),
+                if (step == 1) overnachten(),
                 if (step == 2) Boodsch(),
               ],
             ),
@@ -121,124 +121,145 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  Widget Parkeren() {
+  Widget parkeren() {
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         height: 550,
+        // width: MediaQuery.of(context).size.width,
+        // width: 300,
         child: ListView.builder(
             physics: const AlwaysScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: 1,
+            scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
-              return Container(
-                child: Column(
-                  children: [
-                    Text(
-                      "${widget.citydata?.name}",
-                      style: const TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        "${widget.citydata?.description}",
-                        // "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-                        style: const TextStyle(
-                          fontFamily: 'Poppins_normal',
-                        ),
-                      ),
-                    ),
-                    Container(
-                        padding: const EdgeInsets.all(10),
-                        height: 200,
+              return SingleChildScrollView(
+                child: SizedBox(
+                  height: 600,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: 2,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
                         width: MediaQuery.of(context).size.width,
-                        child: {widget.citydata?.image}.isEmpty == true
-                            ? Image.asset(
-                                "assets/images/image.png",
-                                fit: BoxFit.cover,
-                              )
-                            : Image.network(
-                                "${widget.citydata?.image}",
-                                fit: BoxFit.cover,
-                              )),
-                    Text(
-                      "${widget.citydata?.address}",
-                      style: const TextStyle(
-                        fontFamily: 'Poppins_normal',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Text(
-                        "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-                        style: TextStyle(
-                          fontFamily: 'Poppins_normal',
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              step = 0;
-                            });
-                          },
-                          child: InkWell(
-                            onTap: () {
-                              MapUtils.openMap(
-                                  double.parse("${widget.citydata?.latitude}"),
-                                  double.parse(
-                                      "${widget.citydata?.longitude}"));
-                            },
-                            child: Container(
-                              width: 130,
+                        child: Column(
+                          children: [
+                            Text(
+                              "${widget.citydata?.name}",
+                              style: const TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Container(
                               padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: AppColors.mcolor,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: AppColors.mcolor),
+                              child: Text(
+                                "${widget.citydata?.description}",
+                                // "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
+                                style: const TextStyle(
+                                  fontFamily: 'Poppins_normal',
+                                ),
                               ),
+                            ),
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                height: 200,
+                                width: MediaQuery.of(context).size.width,
+                                child: {widget.citydata?.image}.isEmpty == true
+                                    ? Image.asset(
+                                        "assets/images/image.png",
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.network(
+                                        "${widget.citydata?.image}",
+                                        fit: BoxFit.cover,
+                                      )),
+                            Text(
+                              "${widget.citydata?.address}",
+                              style: const TextStyle(
+                                fontFamily: 'Poppins_normal',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
                               child: const Text(
-                                "Navigeer naar",
-                                textAlign: TextAlign.center,
+                                "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
+                                style: TextStyle(
+                                  fontFamily: 'Poppins_normal',
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            OpenUrl.openUrl();
-                          },
-                          child: Container(
-                            width: 130,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: AppColors.mcolor,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.mcolor),
+                            const SizedBox(
+                              height: 10,
                             ),
-                            child: const Text(
-                              "Meer Info",
-                              textAlign: TextAlign.center,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      step = 0;
+                                    });
+                                  },
+                                  child: InkWell(
+                                    onTap: () {
+                                      MapUtils.openMap(
+                                          double.parse(
+                                              "${widget.citydata?.latitude}"),
+                                          double.parse(
+                                              "${widget.citydata?.longitude}"));
+                                    },
+                                    child: Container(
+                                      width: 130,
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.mcolor,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border:
+                                            Border.all(color: AppColors.mcolor),
+                                      ),
+                                      child: const Text(
+                                        "Navigeer naar",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    OpenUrl.openUrl();
+                                  },
+                                  child: Container(
+                                    width: 130,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.mcolor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: AppColors.mcolor),
+                                    ),
+                                    child: const Text(
+                                      "Meer Info",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
+                            const SizedBox(
+                              height: 60,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 60,
-                    ),
-                  ],
+                      );
+                    },
+                  ),
                 ),
               );
             }),
@@ -246,116 +267,145 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  Widget Overnachten() {
+  Widget overnachten() {
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         height: 550,
+        // width: MediaQuery.of(context).size.width,
+        // width: 300,
         child: ListView.builder(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: 1,
+            scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
-              return Container(
-                child: Column(
-                  children: [
-                    Text(
-                      "${widget.citydata?.name}",
-                      style: const TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        "${widget.citydata?.description}",
-                        // "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-                        style: const TextStyle(
-                          fontFamily: 'Poppins_normal',
-                        ),
-                      ),
-                    ),
-                    Container(
-                        padding: const EdgeInsets.all(10),
-                        height: 200,
+              return SingleChildScrollView(
+                child: SizedBox(
+                  height: 600,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: 2,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
                         width: MediaQuery.of(context).size.width,
-                        child: {widget.citydata?.image} != null
-                            ? Image.network(
-                                "${widget.citydata?.image}",
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                "assets/images/image.png",
-                                fit: BoxFit.cover,
-                              )),
-                    Text(
-                      "${widget.citydata?.address}",
-                      style: const TextStyle(
-                        fontFamily: 'Poppins_normal',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Text(
-                        "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-                        style: TextStyle(
-                          fontFamily: 'Poppins_normal',
+                        child: Column(
+                          children: [
+                            Text(
+                              "${widget.citydata?.name}",
+                              style: const TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                "${widget.citydata?.description}",
+                                // "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
+                                style: const TextStyle(
+                                  fontFamily: 'Poppins_normal',
+                                ),
+                              ),
+                            ),
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                height: 200,
+                                width: MediaQuery.of(context).size.width,
+                                child: {widget.citydata?.image}.isEmpty == true
+                                    ? Image.asset(
+                                        "assets/images/image.png",
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.network(
+                                        "${widget.citydata?.image}",
+                                        fit: BoxFit.cover,
+                                      )),
+                            Text(
+                              "${widget.citydata?.address}",
+                              style: const TextStyle(
+                                fontFamily: 'Poppins_normal',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              child: const Text(
+                                "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
+                                style: TextStyle(
+                                  fontFamily: 'Poppins_normal',
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      step = 0;
+                                    });
+                                  },
+                                  child: InkWell(
+                                    onTap: () {
+                                      MapUtils.openMap(
+                                          double.parse(
+                                              "${widget.citydata?.latitude}"),
+                                          double.parse(
+                                              "${widget.citydata?.longitude}"));
+                                    },
+                                    child: Container(
+                                      width: 130,
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.mcolor,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border:
+                                            Border.all(color: AppColors.mcolor),
+                                      ),
+                                      child: const Text(
+                                        "Navigeer naar",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    OpenUrl.openUrl();
+                                  },
+                                  child: Container(
+                                    width: 130,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.mcolor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: AppColors.mcolor),
+                                    ),
+                                    child: const Text(
+                                      "Meer Info",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 60,
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            MapUtils.openMap(
-                                double.parse("${widget.citydata?.latitude}"),
-                                double.parse("${widget.citydata?.longitude}"));
-                          },
-                          child: Container(
-                            width: 130,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: AppColors.mcolor,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.mcolor),
-                            ),
-                            child: const Text(
-                              "Navigeer naar",
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            OpenUrl.openUrl();
-                          },
-                          child: Container(
-                            width: 130,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: AppColors.mcolor,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.mcolor),
-                            ),
-                            child: const Text(
-                              "Meer Info",
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 60,
-                    ),
-                  ],
+                      );
+                    },
+                  ),
                 ),
               );
             }),
@@ -365,114 +415,143 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Widget Boodsch() {
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         height: 550,
+        // width: MediaQuery.of(context).size.width,
+        // width: 300,
         child: ListView.builder(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: 1,
+            scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
-              return Container(
-                child: Column(
-                  children: [
-                    Text(
-                      "${widget.citydata?.name}",
-                      style: const TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        "${widget.citydata?.description}",
-                        // "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-                        style: const TextStyle(
-                          fontFamily: 'Poppins_normal',
-                        ),
-                      ),
-                    ),
-                    Container(
-                        padding: const EdgeInsets.all(10),
-                        height: 200,
+              return SingleChildScrollView(
+                child: SizedBox(
+                  height: 600,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: 2,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
                         width: MediaQuery.of(context).size.width,
-                        child: {widget.citydata?.image} != null
-                            ? Image.network(
-                                "${widget.citydata?.image}",
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                "assets/images/image.png",
-                                fit: BoxFit.cover,
-                              )),
-                    Text(
-                      "${widget.citydata?.address}",
-                      style: const TextStyle(
-                        fontFamily: 'Poppins_normal',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Text(
-                        "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-                        style: TextStyle(
-                          fontFamily: 'Poppins_normal',
+                        child: Column(
+                          children: [
+                            Text(
+                              "${widget.citydata?.name}",
+                              style: const TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                "${widget.citydata?.description}",
+                                // "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
+                                style: const TextStyle(
+                                  fontFamily: 'Poppins_normal',
+                                ),
+                              ),
+                            ),
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                height: 200,
+                                width: MediaQuery.of(context).size.width,
+                                child: {widget.citydata?.image}.isEmpty == true
+                                    ? Image.asset(
+                                        "assets/images/image.png",
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.network(
+                                        "${widget.citydata?.image}",
+                                        fit: BoxFit.cover,
+                                      )),
+                            Text(
+                              "${widget.citydata?.address}",
+                              style: const TextStyle(
+                                fontFamily: 'Poppins_normal',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              child: const Text(
+                                "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
+                                style: TextStyle(
+                                  fontFamily: 'Poppins_normal',
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      step = 0;
+                                    });
+                                  },
+                                  child: InkWell(
+                                    onTap: () {
+                                      MapUtils.openMap(
+                                          double.parse(
+                                              "${widget.citydata?.latitude}"),
+                                          double.parse(
+                                              "${widget.citydata?.longitude}"));
+                                    },
+                                    child: Container(
+                                      width: 130,
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.mcolor,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border:
+                                            Border.all(color: AppColors.mcolor),
+                                      ),
+                                      child: const Text(
+                                        "Navigeer naar",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    OpenUrl.openUrl();
+                                  },
+                                  child: Container(
+                                    width: 130,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.mcolor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border:
+                                          Border.all(color: AppColors.mcolor),
+                                    ),
+                                    child: const Text(
+                                      "Meer Info",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 60,
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            MapUtils.openMap(
-                                double.parse("${widget.citydata?.latitude}"),
-                                double.parse("${widget.citydata?.longitude}"));
-                          },
-                          child: Container(
-                            width: 130,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: AppColors.mcolor,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.mcolor),
-                            ),
-                            child: const Text(
-                              "Navigeer naar",
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            OpenUrl.openUrl();
-                          },
-                          child: Container(
-                            width: 130,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: AppColors.mcolor,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.mcolor),
-                            ),
-                            child: const Text(
-                              "Meer Info",
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 60,
-                    ),
-                  ],
+                      );
+                    },
+                  ),
                 ),
               );
             }),

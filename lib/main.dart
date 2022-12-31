@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 void main() {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: 'home',
+    initialRoute: 'SplashScreen',
     routes: {
       'SplashScreen': (context) => const SplashScreen(),
       'register': (context) => const SignupScreen(),

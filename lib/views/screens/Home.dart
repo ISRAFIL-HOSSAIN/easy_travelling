@@ -182,7 +182,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   );
-                } else {
+                } 
+                else {
                   return Column(
                     children: const [
                       SizedBox(

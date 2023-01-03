@@ -163,8 +163,8 @@ class SingleScreen extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => DetailScreen(
-                                              citydata:
-                                                  routemodel?.city![index]),
+                                              cid:
+                                                  routemodel?.city![index].id),
                                         ),
                                       );
                                     },
@@ -186,7 +186,7 @@ class SingleScreen extends StatelessWidget {
                                             Text(
                                               "${routemodel?.city![index].name}",
                                             ),
-                                            Icon(Icons.arrow_forward_ios),
+                                            const Icon(Icons.arrow_forward_ios),
                                           ],
                                         )),
                                   )

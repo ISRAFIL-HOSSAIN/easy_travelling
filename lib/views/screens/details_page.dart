@@ -334,7 +334,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
                           physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: snapshot.data?.data2?[1].overview?.length,
+                          itemCount: snapshot.data?.data2?[0].overview?.length,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (_, index) {
@@ -364,8 +364,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                       height: 200,
                                       width: MediaQuery.of(context).size.width,
                                       child: {
-                                                snapshot.data!.data2?[1]
-                                                    .overview?[0].image
+                                                snapshot.data!.data2?[0]
+                                                    .overview?[index].image
                                               }.isEmpty ==
                                               true
                                           ? Image.asset(
@@ -373,11 +373,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                               fit: BoxFit.cover,
                                             )
                                           : Image.network(
-                                              "${snapshot.data!.data2?[1].overview?[0].image}",
+                                              "${snapshot.data!.data2?[0].overview?[index].image}",
                                               fit: BoxFit.cover,
                                             )),
                                   Text(
-                                    "${snapshot.data!.data2?[1].overview?[0].name}",
+                                    "${snapshot.data!.data2?[0].overview?[index].name}",
                                     style: const TextStyle(
                                       fontFamily: 'Poppins_normal',
                                       fontWeight: FontWeight.w500,
@@ -387,7 +387,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     child: Text(
-                                      "${snapshot.data!.data2?[1].overview?[0].description}",
+                                      "${snapshot.data!.data2?[0].overview?[index].description}",
                                       style: const TextStyle(
                                         fontFamily: 'Poppins_normal',
                                       ),
@@ -412,9 +412,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                           onTap: () {
                                             MapUtils.openMap(
                                                 double.parse(
-                                                    "${snapshot.data!.data2?[1].overview?[0].latitude}"),
+                                                    "${snapshot.data!.data2?[0].overview?[index].latitude}"),
                                                 double.parse(
-                                                    "${snapshot.data!.data2?[1].overview?[0].longitude}"));
+                                                    "${snapshot.data!.data2?[0].overview?[index].longitude}"));
                                           },
                                           child: Container(
                                             width: 130,
@@ -436,7 +436,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                       InkWell(
                                         onTap: () {
                                           OpenUrl.openUrl(
-                                              "${snapshot.data!.data2?[1].overview?[0].website}");
+                                              "${snapshot.data!.data2?[0].overview?[index].website}");
                                         },
                                         child: Container(
                                           width: 130,
@@ -514,7 +514,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
                           physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: snapshot.data?.data2?[2].bood?.length,
+                          itemCount: snapshot.data?.data2?[0].bood?.length,
                           shrinkWrap: false,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (_, index) {
@@ -544,7 +544,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                       height: 200,
                                       width: MediaQuery.of(context).size.width,
                                       child: {
-                                                snapshot.data!.data2![2]
+                                                snapshot.data!.data2![0]
                                                     .bood![index].image
                                               }.isEmpty ==
                                               true
@@ -553,11 +553,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                               fit: BoxFit.cover,
                                             )
                                           : Image.network(
-                                              "${snapshot.data!.data2![2].bood![index].image}",
+                                              "${snapshot.data!.data2![0].bood![index].image}",
                                               fit: BoxFit.cover,
                                             )),
                                   Text(
-                                    "${snapshot.data!.data2![2].bood![index].name}",
+                                    "${snapshot.data!.data2![0].bood![index].name}",
                                     style: const TextStyle(
                                       fontFamily: 'Poppins_normal',
                                       fontWeight: FontWeight.w500,
@@ -567,7 +567,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     child: Text(
-                                      "${snapshot.data!.data2![2].bood![index].description}",
+                                      "${snapshot.data!.data2![0].bood![index].description}",
                                       style: const TextStyle(
                                         fontFamily: 'Poppins_normal',
                                       ),
@@ -592,9 +592,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                           onTap: () {
                                             MapUtils.openMap(
                                                 double.parse(
-                                                    "${snapshot.data!.data2![2].bood![index].latitude}"),
+                                                    "${snapshot.data!.data2![0].bood![index].latitude}"),
                                                 double.parse(
-                                                    "${snapshot.data!.data2![2].bood![index].longitude}"));
+                                                    "${snapshot.data!.data2![0].bood![index].longitude}"));
                                           },
                                           child: Container(
                                             width: 130,
@@ -616,7 +616,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                       InkWell(
                                         onTap: () {
                                           OpenUrl.openUrl(
-                                              "${snapshot.data!.data2![2].bood![index].website}");
+                                              "${snapshot.data!.data2![0].bood![index].website}");
                                         },
                                         child: Container(
                                           width: 130,
@@ -672,501 +672,6 @@ class _DetailScreenState extends State<DetailScreen> {
       },
     );
   }
-
-  // Widget overnachten() {
-  //   return FutureBuilder<CityModel>(
-  //     future: fetchcity,
-  //     builder: (context, snapshot) {
-  //       if (snapshot.hasData) {
-  //         return SingleChildScrollView(
-  //           child: Container(
-  //             height: MediaQuery.of(context).size.height * 0.70,
-  //             width: MediaQuery.of(context).size.width * 0.98,
-  //             child: ListView.builder(
-  //               physics: const AlwaysScrollableScrollPhysics(),
-  //               shrinkWrap: true,
-  //               itemCount: snapshot.data?.data2?.length,
-  //               scrollDirection: Axis.vertical,
-  //               itemBuilder: (context, index) {
-  //                 return Container(
-  //                   width: MediaQuery.of(context).size.width,
-  //                   child: Column(
-  //                     children: [
-  //                       Text(
-  //                         "${snapshot.data?.data![index].name!}",
-  //                         style: const TextStyle(
-  //                             fontFamily: "Poppins",
-  //                             fontSize: 18,
-  //                             fontWeight: FontWeight.w500),
-  //                       ),
-  //                       Container(
-  //                         padding: const EdgeInsets.all(10),
-  //                         child: Text(
-  //                           "${snapshot.data?.data![index].description!}",
-  //                           // "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-  //                           style: const TextStyle(
-  //                             fontFamily: 'Poppins_normal',
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       Container(
-  //                           padding: const EdgeInsets.all(10),
-  //                           height: 200,
-  //                           width: MediaQuery.of(context).size.width,
-  //                           child: {
-  //                                     snapshot.data!.data2![index]
-  //                                         .parking![index].image
-  //                                   }.isEmpty ==
-  //                                   true
-  //                               ? Image.asset(
-  //                                   "assets/images/image.png",
-  //                                   fit: BoxFit.cover,
-  //                                 )
-  //                               : Image.network(
-  //                                   "${snapshot.data!.data2![index].parking![index].image}",
-  //                                   fit: BoxFit.cover,
-  //                                 )),
-  //                       Text(
-  //                         "${snapshot.data!.data2![index].parking![index].name}",
-  //                         style: const TextStyle(
-  //                           fontFamily: 'Poppins_normal',
-  //                           fontWeight: FontWeight.w500,
-  //                           fontSize: 16,
-  //                         ),
-  //                       ),
-  //                       Container(
-  //                         padding: const EdgeInsets.all(10),
-  //                         child: Text(
-  //                           "${snapshot.data!.data2![index].parking![index].description}",
-  //                           style: const TextStyle(
-  //                             fontFamily: 'Poppins_normal',
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       const SizedBox(
-  //                         height: 10,
-  //                       ),
-  //                       Row(
-  //                         crossAxisAlignment: CrossAxisAlignment.center,
-  //                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //                         children: [
-  //                           InkWell(
-  //                             onTap: () {
-  //                               setState(() {
-  //                                 step = 0;
-  //                               });
-  //                             },
-  //                             child: InkWell(
-  //                               onTap: () {
-  //                                 MapUtils.openMap(
-  //                                     double.parse(
-  //                                         "${snapshot.data!.data2![index].parking![index].latitude}"),
-  //                                     double.parse(
-  //                                         "${snapshot.data!.data2![index].parking![index].longitude}"));
-  //                               },
-  //                               child: Container(
-  //                                 width: 130,
-  //                                 padding: const EdgeInsets.all(10),
-  //                                 decoration: BoxDecoration(
-  //                                   color: AppColors.mcolor,
-  //                                   borderRadius: BorderRadius.circular(10),
-  //                                   border: Border.all(color: AppColors.mcolor),
-  //                                 ),
-  //                                 child: const Text(
-  //                                   "Navigeer naar",
-  //                                   textAlign: TextAlign.center,
-  //                                 ),
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           InkWell(
-  //                             onTap: () {
-  //                               OpenUrl.openUrl(
-  //                                   "${snapshot.data!.data2![index].parking![index].website}");
-  //                             },
-  //                             child: Container(
-  //                               width: 130,
-  //                               padding: EdgeInsets.all(10),
-  //                               decoration: BoxDecoration(
-  //                                 color: AppColors.mcolor,
-  //                                 borderRadius: BorderRadius.circular(10),
-  //                                 border: Border.all(color: AppColors.mcolor),
-  //                               ),
-  //                               child: const Text(
-  //                                 "Meer Info",
-  //                                 textAlign: TextAlign.center,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       const SizedBox(
-  //                         height: 60,
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 );
-  //               },
-  //             ),
-  //           ),
-  //         );
-  //       } else {
-  //         return Column(
-  //           children: const [
-  //             SizedBox(
-  //               height: 50,
-  //             ),
-  //             Center(
-  //                 child: CircularProgressIndicator(
-  //               color: AppColors.mcolor,
-  //             )),
-  //             Text(
-  //               "No Data Found !",
-  //               style: TextStyle(
-  //                   fontFamily: "Poppins",
-  //                   fontSize: 16,
-  //                   fontWeight: FontWeight.w500),
-  //             ),
-  //           ],
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
-
-  // // Widget overnachten() {
-  // //   return SingleChildScrollView(
-  // //     child: Container(
-  // //       height: MediaQuery.of(context).size.height * 0.70,
-  // //       // width: MediaQuery.of(context).size.width,
-  // //       // width: 300,
-  // //       child: ListView.builder(
-  // //           physics: const AlwaysScrollableScrollPhysics(),
-  // //           shrinkWrap: true,
-  // //           itemCount: 1,
-  // //           scrollDirection: Axis.vertical,
-  // //           itemBuilder: (context, index) {
-  // //             return SingleChildScrollView(
-  // //               child: SizedBox(
-  // //                 height: 600,
-  // //                 width: MediaQuery.of(context).size.width,
-  // //                 child: ListView.builder(
-  // //                   physics: const AlwaysScrollableScrollPhysics(),
-  // //                   itemCount: 2,
-  // //                   shrinkWrap: true,
-  // //                   scrollDirection: Axis.horizontal,
-  // //                   itemBuilder: (context, index) {
-  // //                     return Container(
-  // //                       width: MediaQuery.of(context).size.width,
-  // //                       child: Column(
-  // //                         children: [
-  // //                           Text(
-  // //                             "${widget.citydata?.name}",
-  // //                             style: const TextStyle(
-  // //                                 fontFamily: "Poppins",
-  // //                                 fontSize: 18,
-  // //                                 fontWeight: FontWeight.w500),
-  // //                           ),
-  // //                           Container(
-  // //                             padding: const EdgeInsets.all(10),
-  // //                             child: Text(
-  // //                               "${widget.citydata?.description}",
-  // //                               // "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-  // //                               style: const TextStyle(
-  // //                                 fontFamily: 'Poppins_normal',
-  // //                               ),
-  // //                             ),
-  // //                           ),
-  // //                           Container(
-  // //                               padding: const EdgeInsets.all(10),
-  // //                               height: 200,
-  // //                               width: MediaQuery.of(context).size.width,
-  // //                               child: {widget.citydata?.image}.isEmpty == true
-  // //                                   ? Image.asset(
-  // //                                       "assets/images/image.png",
-  // //                                       fit: BoxFit.cover,
-  // //                                     )
-  // //                                   : Image.network(
-  // //                                       "${widget.citydata?.image}",
-  // //                                       fit: BoxFit.cover,
-  // //                                     )),
-  // //                           Text(
-  // //                             "${widget.citydata?.address}",
-  // //                             style: const TextStyle(
-  // //                               fontFamily: 'Poppins_normal',
-  // //                               fontWeight: FontWeight.w500,
-  // //                               fontSize: 16,
-  // //                             ),
-  // //                           ),
-  // //                           Container(
-  // //                             padding: const EdgeInsets.all(10),
-  // //                             child: const Text(
-  // //                               "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-  // //                               style: TextStyle(
-  // //                                 fontFamily: 'Poppins_normal',
-  // //                               ),
-  // //                             ),
-  // //                           ),
-  // //                           const SizedBox(
-  // //                             height: 10,
-  // //                           ),
-  // //                           Row(
-  // //                             crossAxisAlignment: CrossAxisAlignment.center,
-  // //                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  // //                             children: [
-  // //                               InkWell(
-  // //                                 onTap: () {
-  // //                                   setState(() {
-  // //                                     step = 0;
-  // //                                   });
-  // //                                 },
-  // //                                 child: InkWell(
-  // //                                   onTap: () {
-  // //                                     MapUtils.openMap(
-  // //                                         double.parse(
-  // //                                             "${widget.citydata?.latitude}"),
-  // //                                         double.parse(
-  // //                                             "${widget.citydata?.longitude}"));
-  // //                                   },
-  // //                                   child: Container(
-  // //                                     width: 130,
-  // //                                     padding: const EdgeInsets.all(10),
-  // //                                     decoration: BoxDecoration(
-  // //                                       color: AppColors.mcolor,
-  // //                                       borderRadius: BorderRadius.circular(10),
-  // //                                       border:
-  // //                                           Border.all(color: AppColors.mcolor),
-  // //                                     ),
-  // //                                     child: const Text(
-  // //                                       "Navigeer naar",
-  // //                                       textAlign: TextAlign.center,
-  // //                                     ),
-  // //                                   ),
-  // //                                 ),
-  // //                               ),
-  // //                               InkWell(
-  // //                                 onTap: () {
-  // //                                   OpenUrl.openUrl();
-  // //                                 },
-  // //                                 child: Container(
-  // //                                   width: 130,
-  // //                                   padding: EdgeInsets.all(10),
-  // //                                   decoration: BoxDecoration(
-  // //                                     color: AppColors.mcolor,
-  // //                                     borderRadius: BorderRadius.circular(10),
-  // //                                     border:
-  // //                                         Border.all(color: AppColors.mcolor),
-  // //                                   ),
-  // //                                   child: const Text(
-  // //                                     "Meer Info",
-  // //                                     textAlign: TextAlign.center,
-  // //                                   ),
-  // //                                 ),
-  // //                               ),
-  // //                             ],
-  // //                           ),
-  // //                           const SizedBox(
-  // //                             height: 60,
-  // //                           ),
-  // //                         ],
-  // //                       ),
-  // //                     );
-  // //                   },
-  // //                 ),
-  // //               ),
-  // //             );
-  // //           }),
-  // //     ),
-  // //   );
-  // // }
-
-  // Widget boodsch() {
-  //   return FutureBuilder<CityModel>(
-  //       future: fetchcity,
-  //       builder: (context, snapshot) {
-  //         if (snapshot.hasData) {
-  //           return SingleChildScrollView(
-  //             child: Container(
-  //               height: MediaQuery.of(context).size.height * 0.70,
-  //               // width: MediaQuery.of(context).size.width,
-  //               // width: 300,
-  //               child: ListView.builder(
-  //                   physics: const AlwaysScrollableScrollPhysics(),
-  //                   shrinkWrap: true,
-  //                   itemCount: 1,
-  //                   scrollDirection: Axis.vertical,
-  //                   itemBuilder: (context, index) {
-  //                     return SingleChildScrollView(
-  //                       child: SizedBox(
-  //                         height: MediaQuery.of(context).size.height,
-  //                         width: MediaQuery.of(context).size.width,
-  //                         child: ListView.builder(
-  //                           physics: const AlwaysScrollableScrollPhysics(),
-  //                           itemCount: snapshot.data?.data2?[2].bood?.length,
-  //                           shrinkWrap: true,
-  //                           scrollDirection: Axis.horizontal,
-  //                           itemBuilder: (context, index) {
-  //                             return Container(
-  //                               height:
-  //                                   MediaQuery.of(context).size.height * 0.65,
-  //                               width: MediaQuery.of(context).size.width,
-  //                               child: Column(
-  //                                 children: [
-  //                                   Text(
-  //                                     "${snapshot.data?.data![0].name!}",
-  //                                     style: const TextStyle(
-  //                                         fontFamily: "Poppins",
-  //                                         fontSize: 18,
-  //                                         fontWeight: FontWeight.w500),
-  //                                   ),
-  //                                   Container(
-  //                                     height:
-  //                                         MediaQuery.of(context).size.height *
-  //                                             0.70,
-  //                                     padding: const EdgeInsets.all(10),
-  //                                     child: Text(
-  //                                       "${snapshot.data?.data![0].description!}",
-  //                                       // "op weg naar de Caminito Del Rey, kom je door het Ardales National Park.Overweldigende natuur, met moie doorkijkjes, vergezichten en leuke plekken voor een stop",
-  //                                       style: const TextStyle(
-  //                                         fontFamily: 'Poppins_normal',
-  //                                       ),
-  //                                     ),
-  //                                   ),
-  //                                   Container(
-  //                                       padding: const EdgeInsets.all(10),
-  //                                       height: 200,
-  //                                       width:
-  //                                           MediaQuery.of(context).size.width,
-  //                                       child: {
-  //                                                 snapshot.data!.data2![2]
-  //                                                     .bood![index].image
-  //                                               }.isEmpty ==
-  //                                               true
-  //                                           ? Image.asset(
-  //                                               "assets/images/image.png",
-  //                                               fit: BoxFit.cover,
-  //                                             )
-  //                                           : Image.network(
-  //                                               "${snapshot.data!.data2![2].bood![index].image}",
-  //                                               fit: BoxFit.cover,
-  //                                             )),
-  //                                   Text(
-  //                                     "${snapshot.data!.data2![2].bood![index].name}",
-  //                                     style: const TextStyle(
-  //                                       fontFamily: 'Poppins_normal',
-  //                                       fontWeight: FontWeight.w500,
-  //                                       fontSize: 16,
-  //                                     ),
-  //                                   ),
-  //                                   Container(
-  //                                     padding: const EdgeInsets.all(10),
-  //                                     child: Text(
-  //                                       "${snapshot.data!.data2![2].bood![index].description}",
-  //                                       style: const TextStyle(
-  //                                         fontFamily: 'Poppins_normal',
-  //                                       ),
-  //                                     ),
-  //                                   ),
-  //                                   const SizedBox(
-  //                                     height: 10,
-  //                                   ),
-  //                                   Row(
-  //                                     crossAxisAlignment:
-  //                                         CrossAxisAlignment.center,
-  //                                     mainAxisAlignment:
-  //                                         MainAxisAlignment.spaceEvenly,
-  //                                     children: [
-  //                                       InkWell(
-  //                                         onTap: () {
-  //                                           setState(() {
-  //                                             step = 0;
-  //                                           });
-  //                                         },
-  //                                         child: InkWell(
-  //                                           onTap: () {
-  //                                             MapUtils.openMap(
-  //                                                 double.parse(
-  //                                                   "${snapshot.data!.data2![2].bood![index].latitude}",
-  //                                                 ),
-  //                                                 double.parse(
-  //                                                   "${snapshot.data!.data2![2].bood![index].longitude}",
-  //                                                 ));
-  //                                           },
-  //                                           child: Container(
-  //                                             width: 130,
-  //                                             padding: const EdgeInsets.all(10),
-  //                                             decoration: BoxDecoration(
-  //                                               color: AppColors.mcolor,
-  //                                               borderRadius:
-  //                                                   BorderRadius.circular(10),
-  //                                               border: Border.all(
-  //                                                   color: AppColors.mcolor),
-  //                                             ),
-  //                                             child: const Text(
-  //                                               "Navigeer naar",
-  //                                               textAlign: TextAlign.center,
-  //                                             ),
-  //                                           ),
-  //                                         ),
-  //                                       ),
-  //                                       InkWell(
-  //                                         onTap: () {
-  //                                           OpenUrl.openUrl(
-  //                                               "${snapshot.data!.data2![2].bood![index].website}");
-  //                                         },
-  //                                         child: Container(
-  //                                           width: 130,
-  //                                           padding: EdgeInsets.all(10),
-  //                                           decoration: BoxDecoration(
-  //                                             color: AppColors.mcolor,
-  //                                             borderRadius:
-  //                                                 BorderRadius.circular(10),
-  //                                             border: Border.all(
-  //                                                 color: AppColors.mcolor),
-  //                                           ),
-  //                                           child: const Text(
-  //                                             "Meer Info",
-  //                                             textAlign: TextAlign.center,
-  //                                           ),
-  //                                         ),
-  //                                       ),
-  //                                     ],
-  //                                   ),
-  //                                   const SizedBox(
-  //                                     height: 60,
-  //                                   ),
-  //                                 ],
-  //                               ),
-  //                             );
-  //                           },
-  //                         ),
-  //                       ),
-  //                     );
-  //                   }),
-  //             ),
-  //           );
-  //         } else {
-  //           return Column(
-  //             children: const [
-  //               SizedBox(
-  //                 height: 50,
-  //               ),
-  //               Center(
-  //                   child: CircularProgressIndicator(
-  //                 color: AppColors.mcolor,
-  //               )),
-  //               Text(
-  //                 "No Data Found !",
-  //                 style: TextStyle(
-  //                     fontFamily: "Poppins",
-  //                     fontSize: 16,
-  //                     fontWeight: FontWeight.w500),
-  //               ),
-  //             ],
-  //           );
-  //         }
-  //       });
-  // }
 
 }
 

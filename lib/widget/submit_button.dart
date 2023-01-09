@@ -11,8 +11,8 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 220,
-      height: 50,
+      width: 245,
+      height: 40,
       decoration:
           BoxDecoration(borderRadius: BorderRadius.circular(20), boxShadow: [
         BoxShadow(
@@ -31,12 +31,15 @@ class SubmitButton extends StatelessWidget {
                 Color.fromARGB(255, 241, 241, 241),
               )),
           onPressed: handleButtonClick,
-          child: Text(title,
-              style: const TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(255, 19, 13, 51),
-                fontWeight: FontWeight.w600,
-              ))),
+          child: Text(
+            title,
+            style: const TextStyle(
+                decoration: TextDecoration.none,
+                color: Color.fromARGB(255, 62, 61, 61),
+                fontFamily: "Poppins_medium",
+                fontSize: 14,
+                fontWeight: FontWeight.w600),
+          )),
     );
   }
 }

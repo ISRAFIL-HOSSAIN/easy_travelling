@@ -56,29 +56,25 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(
                     height: 40,
                   ),
-                  DefaultTextStyle(
-                    style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                      fontSize: 26,
-                      color: Color.fromARGB(225, 203, 224, 245),
+                  const Text(
+                    "Account aanmaken",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "Poppins_medium",
+                      fontSize: 22,
                       fontWeight: FontWeight.w600,
-                    )),
-                    child: const Text(
-                      "Account aanmaken",
-                      textAlign: TextAlign.center,
+                      color: Color.fromARGB(248, 236, 236, 236),
                     ),
                   ),
                   const SizedBox(height: 20),
-                  DefaultTextStyle(
-                    style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
+                  const Text(
+                    "Om door te gaan",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "Poppins_normal",
                       fontSize: 16,
-                      color: Color.fromARGB(225, 203, 224, 245),
-                      fontWeight: FontWeight.w400,
-                    )),
-                    child: const Text(
-                      "Om door te gaan",
-                      textAlign: TextAlign.center,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromARGB(248, 236, 236, 236),
                     ),
                   ),
                   const SizedBox(
@@ -89,18 +85,17 @@ class _SignupScreenState extends State<SignupScreen> {
                     height: 40,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        child: DefaultTextStyle(
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                            fontSize: 16,
-                            color: Color.fromARGB(225, 203, 224, 245),
-                            fontWeight: FontWeight.w400,
-                          )),
-                          child: const Text(
-                            "Heeft u al een account ? ",
-                            textAlign: TextAlign.center,
+                        child: const Text(
+                          "Heeft u al een account ? ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: "Poppins_normal",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 243, 243, 243),
                           ),
                         ),
                       ),
@@ -120,7 +115,12 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         child: const Text(
                           'Inloggen',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                            fontFamily: "Poppins_normal",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(248, 35, 35, 35),
+                          ),
                         ),
                       ),
                     ],
@@ -170,26 +170,6 @@ class _SignupScreenState extends State<SignupScreen> {
             height: 20,
           ),
           CustomTextField(
-              controller: addressController,
-              hintText: 'adres',
-              error: addressError,
-              onUseridValueChange: (value) {
-                print(value);
-              }),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomTextField(
-              controller: mobileController,
-              hintText: 'telefoon',
-              error: phoneError,
-              onUseridValueChange: (value) {
-                print(value);
-              }),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomTextField(
               controller: passwordController,
               hintText: 'Wachtwoord',
               error: passwordError,
@@ -208,8 +188,8 @@ class _SignupScreenState extends State<SignupScreen> {
         ],
       ),
     );
-    
   }
+
   void signup() {
     final isValid = _globalKey.currentState!.validate();
     if (isValid) {
@@ -225,6 +205,4 @@ class _SignupScreenState extends State<SignupScreen> {
       return;
     }
   }
-
-  
 }

@@ -17,10 +17,12 @@ class CustomTextField extends StatelessWidget {
     return Container(
       height: 46,
       child: TextFormField(
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-        ),
+        style:const TextStyle(
+            decoration: TextDecoration.none,
+            color: Color.fromARGB(255, 235, 235, 235),
+            fontFamily: "Poppins_normal",
+            fontSize: 14,
+            fontWeight: FontWeight.w500),
         controller: controller,
         textInputAction: TextInputAction.next,
         validator: (value) {
@@ -35,6 +37,10 @@ class CustomTextField extends StatelessWidget {
         },
         decoration: InputDecoration(
             alignLabelWithHint: true,
+            enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+              color: Colors.white54,
+            )),
             focusedBorder: const UnderlineInputBorder(
                 borderSide:
                     BorderSide(color: Color.fromARGB(255, 255, 255, 255))),
@@ -43,7 +49,7 @@ class CustomTextField extends StatelessWidget {
             hintStyle:
                 const TextStyle(color: Color.fromARGB(255, 215, 214, 214)),
             contentPadding: const EdgeInsets.only(bottom: 15),
-            focusColor: Colors.white60),
+            focusColor: Colors.white54),
         autofocus: true,
         keyboardType: TextInputType.multiline,
       ),

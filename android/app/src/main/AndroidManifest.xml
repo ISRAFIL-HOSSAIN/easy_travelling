@@ -33,4 +33,5 @@
             android:value="2" />
     </application>
     <uses-permission android:name="android.permission.Query_ALL_PACKAGES"/> 
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

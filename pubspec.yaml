@@ -94,9 +94,15 @@ flutter:
     - family: Poppins_normal 
       fonts:
         - asset: assets/fonts/poppinsregular.ttf
+    - family: Poppins_sego
+      fonts:
+        - asset: assets/fonts/segoeprintfont.ttf
     - family: Poppins_semi
       fonts:
         - asset: assets/fonts/poppinsbold.ttf
+    - family: Poppins_medium
+      fonts:
+        - asset: assets/fonts/poppinmedium.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

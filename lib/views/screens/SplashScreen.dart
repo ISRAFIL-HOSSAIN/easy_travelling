@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_travel/views/screens/Home.dart';
+import 'package:easy_travel/widget/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -44,19 +45,16 @@ class _SplashScreenState extends State<SplashScreen> {
                   const SizedBox(
                     height: 150,
                   ),
-                  DefaultTextStyle(
-                    style: GoogleFonts.lato(
-                        textStyle: const TextStyle(
-                      fontSize: 32,
-                      fontStyle: FontStyle.italic,
-                      color: Color.fromARGB(226, 43, 34, 4),
-                      fontWeight: FontWeight.w700,
-                    )),
-                    child: const Text(
-                      "Easy Travelling",
-                      textAlign: TextAlign.center,
-                    ),
+                  const Text(
+                    "Easy Travelling",
+                    style: TextStyle(
+                      decoration: TextDecoration.none,
+                        color: Color.fromARGB(255, 20, 20, 20),
+                        fontFamily: "Poppins",
+                        fontSize: 25,
+                        fontWeight: FontWeight.w500),
                   ),
+
                   const SizedBox(
                     height: 20,
                   ),

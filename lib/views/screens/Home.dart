@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: const Color.fromARGB(255, 241, 248, 250),
       appBar: AppBar(
         // title: const Text('Easy Traveling'),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         toolbarHeight: 0,
         automaticallyImplyLeading: false,
       ),
@@ -91,10 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(right: 250),
             child: const Text(
               "Routes",
-              style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
           ),
           const SizedBox(
@@ -119,71 +116,84 @@ class _HomeScreenState extends State<HomeScreen> {
                                       left: 10, right: 10),
                                   child: Column(
                                     children: [
-                                      Card(
-                                        elevation: 10.0,
-                                        margin: EdgeInsets.only(bottom: 15),
-                                        child: Column(children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              showDialogFunc(context,
-                                                  "${snapshot.data?.data![index].image}");
-                                            },
-                                            child: Container(
-                                              height: 200.0,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              child: (snapshot
-                                                          .data
-                                                          ?.data![index]
-                                                          .image) !=
-                                                      null
-                                                  ? Image.network(
-                                                      // routecontroller.routeList,
-                                                      "${snapshot.data?.data![index].image}",
-                                                      fit: BoxFit.cover,
-                                                    )
-                                                  : Image.asset(
-                                                      "assets/images/image.png",
-                                                      fit: BoxFit.cover),
+                                      Column(children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            showDialogFunc(context,
+                                                "${snapshot.data?.data![index].image}");
+                                          },
+                                          child: Container(
+                                            // height: 250.0,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(25.0),
                                             ),
+                                            child: (snapshot.data?.data![index]
+                                                        .image) !=
+                                                    null
+                                                ? Image.network(
+                                                    // routecontroller.routeList,
+                                                    "${snapshot.data?.data![index].image}",
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : Image.asset(
+                                                    "assets/images/image.png",
+                                                    fit: BoxFit.cover),
                                           ),
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SingleScreen(
-                                                          routemodel: snapshot
-                                                              .data
-                                                              ?.data![index]),
-                                                ),
-                                              );
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.all(16.0),
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                "${snapshot.data?.data![index].name}",
-                                                style: const TextStyle(
-                                                    fontFamily: "Poppins",
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w500),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SingleScreen(
+                                                        routemodel: snapshot
+                                                            .data
+                                                            ?.data![index]),
                                               ),
+                                            );
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.all(12.0),
+                                            decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(10),
+                                                  bottomRight:
+                                                      Radius.circular(10)),
+                                              color: AppColors.mcolor,
+                                            ),
+                                            alignment: Alignment.centerLeft,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "${snapshot.data?.data![index].name}",
+                                                  style: const TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Icon(Icons.arrow_forward_ios)
+                                              ],
                                             ),
                                           ),
-                                        ]),
-                                      ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                      ]),
                                     ],
                                   ));
                             }),
                       ),
                     ),
                   );
-                } 
-                else {
+                } else {
                   return Column(
                     children: const [
                       SizedBox(

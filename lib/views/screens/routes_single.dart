@@ -33,7 +33,7 @@ class SingleScreen extends StatelessWidget {
                       Get.to(const HomeScreen());
                     },
                     child: Container(
-                      padding: const EdgeInsets.only(left: 15, bottom: 21),
+                      padding: const EdgeInsets.only(left: 18, bottom: 21),
                       height: 40,
                       width: 28,
                       child: Image.asset(
@@ -93,7 +93,7 @@ class SingleScreen extends StatelessWidget {
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height: 150,
+              height: 250,
               margin: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -163,8 +163,7 @@ class SingleScreen extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => DetailScreen(
-                                              cid:
-                                                  routemodel?.city![index].id),
+                                              cid: routemodel?.city![index].id),
                                         ),
                                       );
                                     },

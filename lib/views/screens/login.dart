@@ -41,30 +41,26 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 Image.asset("assets/images/title.png"),
-                DefaultTextStyle(
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                    fontSize: 26,
-                    color: Color.fromARGB(225, 203, 224, 245),
-                    fontWeight: FontWeight.w500,
-                  )),
-                  child: const Text(
-                    "Inloggen",
-                    textAlign: TextAlign.center,
-                  ),
+                const Text(
+                  "Inloggen",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      decoration: TextDecoration.none,
+                      color: Color.fromARGB(255, 235, 235, 235),
+                      fontFamily: "Poppins_medium",
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 15),
-                DefaultTextStyle(
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                    fontSize: 18,
-                    color: Color.fromARGB(225, 203, 224, 245),
-                    fontWeight: FontWeight.w400,
-                  )),
-                  child: const Text(
-                    "Om door te gaan",
-                    textAlign: TextAlign.center,
-                  ),
+                const Text(
+                  "Om door te gaan",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      decoration: TextDecoration.none,
+                      color: Color.fromARGB(255, 235, 235, 235),
+                      fontFamily: "Poppins_normal",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(25),
@@ -72,10 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Form(
                     key: _globalKey,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomTextField(
                             controller: emailController,
-                            hintText: "E-mail adres",
+                            hintText: "Gebruikersnaam",
                             error: emailError,
                             onUseridValueChange: (value) {
                               print(value);
@@ -101,17 +98,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 20),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
                                 width: 90,
-                                height: 3,
+                                height: 2,
                                 color:
                                     const Color.fromARGB(255, 215, 215, 215)),
                             const SizedBox(width: 5),
                             const Text(
                               "Inloggen met ",
                               style: TextStyle(
-                                color: Color.fromARGB(255, 226, 226, 226),
+                                color: Color.fromARGB(255, 248, 246, 246),
+                                fontFamily: "Poppins_medium",
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                               ),
@@ -119,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             const SizedBox(width: 5),
                             Container(
                               width: 90,
-                              height: 3,
+                              height: 2,
                               color: const Color.fromARGB(255, 215, 215, 215),
                             ),
                           ],
@@ -128,36 +127,38 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 25,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const SizedBox(
-                              width: 60,
-                            ),
-                            Container(
-                              height: 60,
-                              width: 60,
-                              padding: const EdgeInsets.all(15),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50))),
-                              child: Image.asset(
-                                "assets/images/googlelogo.png",
-                                fit: BoxFit.cover,
+                            Center(
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                padding: const EdgeInsets.all(8),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50))),
+                                child: Image.asset(
+                                  "assets/images/googlelogo.png",
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             const SizedBox(
-                              width: 60,
+                              width: 40,
                             ),
-                            Container(
-                              height: 60,
-                              width: 60,
-                              padding: const EdgeInsets.all(15),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50))),
-                              child: Image.asset(
-                                "assets/images/fb.png",
+                            Center(
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                padding: const EdgeInsets.all(8),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50))),
+                                child: Image.asset(
+                                  "assets/images/fb.png",
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -169,39 +170,45 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 15,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              child: DefaultTextStyle(
-                                style: GoogleFonts.poppins(
-                                    textStyle: const TextStyle(
-                                  fontSize: 16,
-                                  color: Color.fromARGB(223, 212, 233, 255),
-                                  fontWeight: FontWeight.w500,
-                                )),
-                                child: const Text(
-                                  "Geen account?",
-                                  textAlign: TextAlign.center,
+                              child: const Text(
+                                "Geen account?",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: "Poppins_normal",
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
                             const SizedBox(
                               width: 40,
                             ),
-                            OutlinedButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SignupScreen()));
-                              },
-                              style: OutlinedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
+                            Center(
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignupScreen()));
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
                                 ),
-                              ),
-                              child: const Text(
-                                'Aanmaken',
-                                style: TextStyle(color: Colors.black),
+                                child: const Text(
+                                  'Aanmaken',
+                                  style: TextStyle(
+                                    fontFamily: "Poppins_normal",
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black87,
+                                  ),
+                                ),
                               ),
                             ),
                           ],

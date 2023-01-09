@@ -12,11 +12,9 @@ class SignupController extends GetxController {
   String lastname = "";
   String email = "";
   String password = "";
-  String address = "";
-  String phone = "";
 
-  register(String firstname, String lastname, String email, String password,
-      String address, String phone) {
+  static register(
+      String firstname, String lastname, String email, String password) {
     if (firstname.isEmpty) {
       Notify.snackbar("FirstName is required", "Please Input FirstName");
     } else if (lastname.isEmpty) {
@@ -28,23 +26,17 @@ class SignupController extends GetxController {
         "Password Not Empty",
         "Please Input Password",
       );
-    } else if (address.isEmpty) {
-      Notify.snackbar("Address is required", "Please Input Address");
-    } else if (phone.isEmpty) {
-      Notify.snackbar("Phone is required", "Please Input Phone");
     } else {
       firstname = firstname;
       lastname = lastname;
       email = email;
       password = password;
-      address = address;
-      phone = phone;
 
-      registerWithEmail();
+      registerWithEmail(firstname, lastname, email, password);
     }
   }
 
-  bool isEmailValid(String email) {
+  static bool isEmailValid(String email) {
     bool emailValid = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(email);
@@ -97,15 +89,16 @@ class SignupController extends GetxController {
   //   }
   // }
 
-  Future<void> registerWithEmail() async {
+  static Future<void> registerWithEmail(
+      firstname, lastname, email, password) async {
     try {
       var headers = {'Content-Type': 'application/json'};
       var url =
           Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.register);
       Map body = {
         'first_name': firstname.toString(),
-        'phone': phone,
-        'address': address,
+        'phone': "0177",
+        'address': "address",
         'last_name': lastname,
         'email': email.trim(),
         'password': password,

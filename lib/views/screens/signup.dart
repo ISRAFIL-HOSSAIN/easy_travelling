@@ -21,16 +21,14 @@ class _SignupScreenState extends State<SignupScreen> {
   String firstnameError = "FirstName Can not be empty ";
   String lastnameError = "LastName Can not be empty ";
   String emailError = "Email Can not be empty ";
-  String addressError = "Address Can not be empty ";
   String passwordError = "Password Can not be empty ";
-  String phoneError = "Phone Can not be empty ";
+
 
   TextEditingController firstnameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController mobileController = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -193,13 +191,11 @@ class _SignupScreenState extends State<SignupScreen> {
   void signup() {
     final isValid = _globalKey.currentState!.validate();
     if (isValid) {
-      signupController.register(
+      SignupController.register(
         firstnameController.text,
         lastnameController.text,
         emailController.text,
         passwordController.text,
-        addressController.text,
-        mobileController.text,
       );
     } else {
       return;

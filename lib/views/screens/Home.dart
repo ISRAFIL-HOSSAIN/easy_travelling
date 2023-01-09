@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 "${snapshot.data?.data![index].image}");
                                           },
                                           child: Container(
-                                            // height: 250.0,
+                                            height: 250.0,
                                             width: MediaQuery.of(context)
                                                 .size
                                                 .width,

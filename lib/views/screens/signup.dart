@@ -1,5 +1,6 @@
 import 'package:easy_travel/controller/register_controller.dart';
 import 'package:easy_travel/views/screens/login.dart';
+import 'package:easy_travel/widget/passwordfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,18 +18,16 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   SignupController signupController = Get.put(SignupController());
   final _globalKey = GlobalKey<FormState>();
-
+  bool passwordvisible = true;
   String firstnameError = "FirstName Can not be empty ";
   String lastnameError = "LastName Can not be empty ";
   String emailError = "Email Can not be empty ";
   String passwordError = "Password Can not be empty ";
 
-
   TextEditingController firstnameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -167,10 +166,11 @@ class _SignupScreenState extends State<SignupScreen> {
           const SizedBox(
             height: 20,
           ),
-          CustomTextField(
+          PasswordField(
               controller: passwordController,
               hintText: 'Wachtwoord',
               error: passwordError,
+              passwordvisible: passwordvisible,
               onUseridValueChange: (value) {
                 print(value);
               }),
